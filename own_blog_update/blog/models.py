@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 # 2       python
 class Category(models.Model):
     cate_name = models.CharField(max_length=20)
+    def __str__(self):
+        return self.cate_name
 
 
 
@@ -16,7 +18,8 @@ class Category(models.Model):
 # 2       python学习
 class Tag(models.Model):
     tag_name = models.CharField(max_length=20)
-
+    def __str__(self):
+        return self.tag_name
 
 # 标题、
 # 正文、
@@ -43,3 +46,6 @@ class post(models.Model):
     # User是已经Django已经实现的内置应用，专门处理网站用户的注册、登录等流程。这里用户和博文的关系依然是一对多，
     # 因此使用外键。
     user = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.title
