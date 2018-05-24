@@ -1,10 +1,101 @@
-<!--DOCTYPE html-->
+{% load staticfiles %}
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf8">
-    <title>{{ title }}</title>
+    <title>Black &amp; White</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
+
+    <!-- js -->
+    <script src="{% static 'blog/js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/js/pace.min.js' %}"></script>
+    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>
 </head>
 <body>
-    <h1>Hello Django</h1>
+
+    {% for post in post_list %}
+        <article class="post post-{{ post.pk }}">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="post-category">
+                        <a href="#">{{ post.cate.cate_name }}</a></span>
+                    <span class="post-date"><a href="#"><time class="entry-date"
+                                                              datetime="{{ post.create_time }}">{{ post.create_time }}</time></a></span>
+                    <span class="post-author"><a href="#">{{ post.author }}</a></span>
+                </div>
+            </header>
+        </article>
+    {% empty %}
+        <div class="no-post">暂时还没有发布的文章！</div>
+    {% endfor %}
 </body>
-</html>
+
+    <!--{% comment %}-->
+    <!--简单分页导航：-->
+    <!--{% if is_paginated %}-->
+        <!--<div class="pagination-simple">-->
+            <!--&lt;!&ndash; 如果当前页还有上一页，显示一个上一页的按钮 &ndash;&gt;-->
+            <!--{% if page_obj.has_previous %}-->
+                <!--<a href="?page={{ page_obj.previous_page_number }}">上一页</a>-->
+            <!--{% endif %}-->
+            <!--&lt;!&ndash; 显示当前页面信息 &ndash;&gt;-->
+            <!--<span class="current">第 {{ page_obj.number }} 页 / 共 {{ paginator.num_pages }} 页</span>-->
+            <!--&lt;!&ndash; 如果当前页还有下一页，显示一个下一页的按钮 &ndash;&gt;-->
+            <!--{% if page_obj.has_next %}-->
+                <!--<a href="?page={{ page_obj.next_page_number }}">下一页</a>-->
+            <!--{% endif %}-->
+        <!--</div>-->
+    <!--{% endif %}-->
+    <!--{% endcomment %}-->
+
+    <!--{% comment %}-->
+    <!--完善的分页导航-->
+    <!--{% endcomment %}-->
+    <!--{% if is_paginated %}-->
+        <!--<div class="pagination">-->
+            <!--<ul>-->
+                <!--{% if first %}-->
+                    <!--<li><a href="?page=1">1</a></li>-->
+                <!--{% endif %}-->
+                <!--{% if left %}-->
+                    <!--{% if left_has_more %}-->
+                        <!--<li><span>...</span></li>-->
+                    <!--{% endif %}-->
+                    <!--{% for i in left %}-->
+                        <!--<li><a href="?page={{ i }}">{{ i }}</a></li>-->
+                    <!--{% endfor %}-->
+                <!--{% endif %}-->
+                <!--<li class="current"><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>-->
+                <!--{% if right %}-->
+                    <!--{% for i in right %}-->
+                        <!--<li><a href="?page={{ i }}">{{ i }}</a></li>-->
+                    <!--{% endfor %}-->
+                    <!--{% if right_has_more %}-->
+                        <!--<li><span>...</span></li>-->
+                    <!--{% endif %}-->
+                <!--{% endif %}-->
+                <!--{% if last %}-->
+                    <!--<li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>-->
+                <!--{% endif %}-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--{% endif %}-->

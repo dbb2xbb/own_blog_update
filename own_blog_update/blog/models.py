@@ -1,3 +1,5 @@
+# coding:utf-8
+
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -17,7 +19,7 @@ class Category(models.Model):
 # 1       django学习
 # 2       python学习
 class Tag(models.Model):
-    tag_name = models.CharField(max_length=20)
+    tag_name = models.CharField(max_length=100)
     def __str__(self):
         return self.tag_name
 
@@ -27,7 +29,7 @@ class Tag(models.Model):
 # 创建时间、
 # 最后修改时间、
 # 文章作者
-class post(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     excerpt = models.CharField(max_length=200)
