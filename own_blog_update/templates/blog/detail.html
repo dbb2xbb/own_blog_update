@@ -18,7 +18,10 @@
             </div>
         </header>
         <div class="entry-content clearfix">
-            <p>{{post.body}}</p>
+            <!--此处加上safe过滤器是因为django默认情况下会返回转义后的数据，-->
+            <!--而此处因为正要使用html渲染后的样式，不需要进行转义，故此处需要告知其为-->
+            <!--数据安全，无需转义。-->
+            <p>{{post.body|safe}}</p>
         </div>
     </article>
     <section class="comment-area" id="comment-area">
