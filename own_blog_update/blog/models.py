@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 # Create your models here.
 
 # 分类标签设计成如下模式：
@@ -51,3 +53,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    # 获取绝对路径
+    def get_absolute_url(self):
+        return reverse("blog:detail",kwargs={'post_id':self.id})
+

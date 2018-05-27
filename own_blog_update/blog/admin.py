@@ -3,7 +3,7 @@ from . import models
 # Register your models here.
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['id','title']
+    list_display = ['id','title','create_time']
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ['tag_name']
